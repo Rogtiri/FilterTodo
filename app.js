@@ -36,6 +36,25 @@ app.post('/sendTask', (req, res) => {
   })
 })
 
+app.put('/update', (req, res) => {
+  fs.readFile('Note.json', (err, data) => {
+    if(err) return res.status(500)
+    
+    let tasks;
+
+    tasks = JSON.parse(data);
+    const {id, completed} = req.body;
+
+    const index = tasks.findIndex(t => t.id == id);
+
+    tasks[index].completed = completed;
+    fs.writeFile('Note.json', JSON.stringify(tasks, null, 2), () => {
+      res.status(200).send;
+    })
+  })
+})
+
+
 app.listen(PORT, (err, res) => {
   if(err) return console.log(err);
   console.log(`start http://localhost:${PORT}`)
