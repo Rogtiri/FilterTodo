@@ -7,13 +7,20 @@ const output = document.getElementById('output');
 
 let id_num;
 
+let current = 'not_completed'
+
 function getList(){
   fetch('/take_list')
     .then(res => res.json())
     .then(data => {
       output.innerHTML = '';
       data.arr.forEach(t => {
-        if(!t.completed){
+        const showTask = 
+          current == 'all' || 
+          (current == 'completed' && t.completed) ||
+          (current == 'not_completed' && !t.completed)
+        
+        if(showTask){
            output.innerHTML += 
             `<p>
               <input type='checkbox' data-id='${t.id}' ${t.completed ? 'checked' : ''}>
@@ -49,21 +56,8 @@ btn_add.addEventListener('click', () => {
 })
 
 btn_show_ready.addEventListener('click', () => {
-  fetch('/take_list')
-    .then(res => res.json())
-    .then(data => {
-      output.innerHTML = '';
-      data.arr.forEach(t => {
-        if(t.completed){
-           output.innerHTML += 
-            `<p>
-              <input type='checkbox' data-id='${t.id}' ${t.completed ? 'checked' : ''}>
-              <span>${t.text}</span>
-            </p>`
-        }
-      })
-      checkBoxer();
-    })
+  current = 'completed'
+  getList();
 })
 
 function checkBoxer(){
@@ -84,6 +78,7 @@ function checkBoxer(){
       })
 }
 btn_show_notready.addEventListener('click', () => {
+  current = 'not_completed'
   getList();
 })
 

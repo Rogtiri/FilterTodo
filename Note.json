@@ -7,17 +7,17 @@
   {
     "id": 2,
     "text": "ufy",
-    "completed": false
+    "completed": true
   },
   {
     "id": 3,
     "text": "Проверить ххолодос",
-    "completed": false
+    "completed": true
   },
   {
     "id": 4,
     "text": "Купить хлеб",
-    "completed": false
+    "completed": true
   },
   {
     "id": 5,
@@ -32,6 +32,6 @@
   {
     "id": 7,
     "text": "ufy",
-    "completed": true
+    "completed": false
   }
 ]

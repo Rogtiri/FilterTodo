@@ -49,7 +49,7 @@ app.put('/update', (req, res) => {
 
     tasks[index].completed = completed;
     fs.writeFile('Note.json', JSON.stringify(tasks, null, 2), () => {
-      res.status(200).send;
+      res.status(200);
     })
   })
 })
