@@ -12,7 +12,6 @@ app.get('/take_list', (req,res) => {
     if(err) return res.status(500).send('Ошибка чтения данных');
 
     const note = JSON.parse(data);
-    console.log(note)
     res.json({
       arr: note
     })
@@ -50,6 +49,9 @@ app.put('/update', (req, res) => {
     tasks[index].completed = completed;
     fs.writeFile('Note.json', JSON.stringify(tasks, null, 2), () => {
       res.status(200);
+    })
+    res.json({
+      tasks
     })
   })
 })

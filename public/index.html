@@ -4,14 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <input name="text" id="text">
-  <button class="btn" id="btn_add" type="submit">Добавить запись</button>
-  <button class="btn" id="btn_show_ready">Завершенные задачи</button>
-  <button class="btn" id="btn_show_notready">Не готовые задачи</button>
-  
+  <h1>TODO-List з фільтрацією</h1>
+  <div class="first_block">
+    <textarea name="text" id="text"></textarea>
+    <ion-icon name="pencil-outline"  id="btn_add"></ion-icon>
+  </div>
   <div id="output"></div>
+  <div class="theard_block">
+    <span class="ready"><ion-icon name="checkmark-done-outline" id="btn_show_ready"></ion-icon>Готові</span>
+    <span class="ready"><ion-icon name="close-outline" id="btn_show_notready"></ion-icon>Не готові</span>
+  </div>
+  
   <script src="scrip.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

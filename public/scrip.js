@@ -16,16 +16,18 @@ function getList(){
       output.innerHTML = '';
       data.arr.forEach(t => {
         const showTask = 
-          current == 'all' || 
           (current == 'completed' && t.completed) ||
           (current == 'not_completed' && !t.completed)
         
         if(showTask){
            output.innerHTML += 
-            `<p>
-              <input type='checkbox' data-id='${t.id}' ${t.completed ? 'checked' : ''}>
-              <span>${t.text}</span>
-            </p>`
+            `<div class="task">
+              <p>
+                <input type='checkbox' id="check" data-id='${t.id}' ${t.completed ? 'checked' : ''}>
+                <span>${t.text}</span>
+              </p>
+              </div>
+            `
         }
       })
       id_num = data.arr.length;
@@ -66,6 +68,8 @@ function checkBoxer(){
           const id = Number(checkbox.dataset.id);
           const completed = checkbox.checked;
 
+          const taskChange = checkbox.closest('.task')
+          taskChange.classList.add('hiden');
           fetch('/update', {
             method: 'PUT',
             headers: {
@@ -73,7 +77,11 @@ function checkBoxer(){
             },
             body: JSON.stringify({id, completed})
           })
-          .then(() => getList())
+          .then(() =>{
+            taskChange.addEventListener('transitionend', () => {
+              getList()
+            }, {once: true})
+          })
         })
       })
 }
